@@ -1,23 +1,25 @@
-package com.estoque.gerenciador.models;
+package com.estoque.gerenciador.dtos;
 
-import jakarta.persistence.*;
-import org.springframework.hateoas.RepresentationModel;
-import java.io.Serializable;
+import com.estoque.gerenciador.models.ProductModel;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
-@Table(name = "TB_PRODUCT")
-public class ProductModel extends RepresentationModel<ProductModel> implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class ProductResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idProduct;
     private String name;
     private BigDecimal valor;
     private String descricao;
     private String marca;
+
+    public ProductResponseDto(ProductModel productModel) {
+        this.idProduct = productModel.getIdProduct();
+        this.name = productModel.getName();
+        this.valor = productModel.getValor();
+        this.descricao = productModel.getDescricao();
+        this.marca = productModel.getMarca();
+    }
 
     public UUID getIdProduct() {
         return idProduct;
